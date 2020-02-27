@@ -15,6 +15,7 @@ class AddPasswordColumnToEmployee extends Migration
     {
         Schema::table('employees', function (Blueprint $table) {
             //
+            $table->string('password')->default('12345');
         });
     }
 
@@ -27,6 +28,7 @@ class AddPasswordColumnToEmployee extends Migration
     {
         Schema::table('employees', function (Blueprint $table) {
             //
+            $table->dropColumn('password');
         });
     }
 }

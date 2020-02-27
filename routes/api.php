@@ -21,10 +21,24 @@ Route::group([
 
 
 Route::group([
-    'middle' => 'jwt.auth',
-    'namespace' => 'App\Http\Controllers',
-    'prefix' => 'user'
+    'middleware' => 'jwt.auth',
+    'prefix' => 'employee'
 ], function($router)  {
+
+    // protected end point to create employee
+    Route::post('/', 'EmployeeController@store');
+    Route::get('/', 'EmployeeController@index');
+    Route::post('compute/paye/{id}', 'EmployeeController@computePayeByEmployeeId');
+
+});
+
+Route::group([
+    'middleware' => 'jwt.auth',
+    'prefix' => 'scale'
+], function($router) {
+    Route::post('/', 'ScaleController@store');
+    Route::get('/', 'ScaleController@index');
 
 
 });
+Route::get('calculated', 'ScaleController@percentages');

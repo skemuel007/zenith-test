@@ -14,6 +14,41 @@ class AuthController extends Controller
     {
     }
 
+    /**
+     * Login method of the Applicant Authentication Controller
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * @SWG\Post(
+     *     path="auth/login",
+     *     tags={"User"},
+     *     summary="Logs user in",
+     *     @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Applicant Login"),
+     *          description="Json format"
+     *     ),
+     *     @SwG\Response(
+     *          response=200,
+     *          description="title: Applicant Login",
+     *          @SWG\Schema(ref="#/definitions/Applicant Login")
+     *     ),
+     *     @SWG\Response(
+     *          response=422,
+     *          description="title: Parameter validation failure",
+     *     ),
+     *     @SWG\Response(
+     *          response=401,
+     *          description="title: Authentication error",
+     *     ),
+     *     @SWG\Response(
+     *          response=405,
+     *          description="Invalid Http Method"
+     *     )
+     * )
+     */
     public function login(Request $request) {
         // validate request
         $validator = Validator::make($request->all(), [

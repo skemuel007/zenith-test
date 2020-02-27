@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Employee;
+use App\Scale;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -11,11 +12,16 @@ class EmployeeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $employees = Employee::all();
+
+        return response()->json([
+            'message' => 'Employee(s) record',
+            'data' => $employees
+        ],200);
     }
 
     /**
@@ -31,7 +37,7 @@ class EmployeeController extends Controller
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'email' => 'required|string|email|max:255|unique:employees',
-            'phone_number' => 'required|string',
+            'phone_number' => 'required|string|unique:employees',
             'salary' => 'required'
         ]);
 
@@ -60,6 +66,32 @@ class EmployeeController extends Controller
             'message' => 'Employee record created',
             'data' => []
         ], 201);
+    }
+
+    public function computePayeByEmployeeId($id) {
+        // get employee record
+        $employee = Employee::findOrFail($id);
+
+        // retrieve gradation scale
+        $scales = Scale::all();
+        $paye = 0.0;
+        $employeeSalary = $employee->salary;
+        foreach ($scales as $scale) {
+            if( $employeeSalary > 0) {
+                if( $employeeSalary > $scale->monthly) {
+                    $paye += $scale->monthly * ($scale->rate / 100);
+                    $employeeSalary =  $employeeSalary - $scale->monthly;
+                }
+            }
+        }
+
+        return response()->json([
+            'message' => 'Paye for employee',
+            'data' => [
+                'salary' => $employee->salary,
+                'paye' => number_format($paye, 2, '.', '')
+            ]
+        ]);
     }
 
     /**

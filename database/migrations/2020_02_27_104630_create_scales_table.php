@@ -15,6 +15,8 @@ class CreateScalesTable extends Migration
     {
         Schema::create('scales', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->decimal('monthly');
+            $table->decimal('rate');
             $table->timestamps();
         });
     }

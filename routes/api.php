@@ -16,6 +16,7 @@ Route::group([
     'prefix' => 'auth'
 ], function() {
     Route::post('login', 'AuthController@login')->name('login');
+    Route::post('create', 'AuthController@create')->name('create');
 });
 
 
@@ -25,5 +26,5 @@ Route::group([
     'prefix' => 'user'
 ], function($router)  {
 
-    Route::post('create', 'AuthController@create')->name('create');
+
 });

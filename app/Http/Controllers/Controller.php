@@ -12,9 +12,9 @@ use Illuminate\Routing\Controller as BaseController;
  * @package App\Http\Controllers
  *
  * @SWG\Swagger(
- *     basePath="/api",
+ *     basePath="/api/",
  *     host="localhost:8000",
- *     schemes={"https", "http"},
+ *     schemes={"http"},
  *     @SWG\Info(
  *          version="1.0",
  *          title="Zenith Insurance Test",

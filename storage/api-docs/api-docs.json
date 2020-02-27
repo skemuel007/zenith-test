@@ -1,0 +1,218 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Zenith Insurance Test",
+        "contact": {
+            "name": "Stanley-Kemuel Lloyd Salvation"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8000",
+    "basePath": "/api/",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Logs user in",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Json format",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/User Login"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "title: User login successful",
+                        "schema": {
+                            "$ref": "#/definitions/User Registration"
+                        }
+                    },
+                    "422": {
+                        "description": "title: Parameter validation failure"
+                    },
+                    "401": {
+                        "description": "title: Authentication error"
+                    },
+                    "405": {
+                        "description": "Invalid Http Method"
+                    }
+                }
+            }
+        },
+        "/auth/create": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Creates a new User",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Json format",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/User Registration"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "title: Users Record Created",
+                        "schema": {
+                            "$ref": "#/definitions/User Registration"
+                        }
+                    },
+                    "422": {
+                        "description": "title: Parameter validation failure"
+                    },
+                    "401": {
+                        "description": "title: Authentication error"
+                    },
+                    "405": {
+                        "description": "Invalid Http Method"
+                    }
+                }
+            }
+        },
+        "/compute/paye/{id}": {
+            "get": {
+                "tags": [
+                    "Employee"
+                ],
+                "summary": "Display the paye by employee id",
+                "description": "Calculates employee payee",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Display the paye by employee id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "payee for employee"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization: Bearer": "token"
+                    }
+                ]
+            }
+        },
+        "/scale": {
+            "post": {
+                "tags": [
+                    "Scale"
+                ],
+                "summary": "Create Gradation Scale",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Json format",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Scale"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "title: Scale Added",
+                        "schema": {
+                            "$ref": "#/definitions/User Registration"
+                        }
+                    },
+                    "422": {
+                        "description": "title: Parameter validation failure"
+                    },
+                    "401": {
+                        "description": "title: Authentication error"
+                    },
+                    "405": {
+                        "description": "Invalid Http Method"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Scale": {
+            "required": [
+                "monthly",
+                "rate"
+            ],
+            "properties": {
+                "monthly": {
+                    "description": "Monthly Gradation Scale",
+                    "type": "number",
+                    "example": "250000"
+                },
+                "rate": {
+                    "description": "Monthly rate",
+                    "type": "string",
+                    "example": "7"
+                }
+            }
+        },
+        "User Registration": {
+            "required": [
+                "name",
+                "email",
+                "password"
+            ],
+            "properties": {
+                "name": {
+                    "description": "User's name",
+                    "type": "string",
+                    "example": "Samuel Kelvin"
+                },
+                "email": {
+                    "description": "User's email address",
+                    "type": "string",
+                    "example": "hope@yahoo.co.uk"
+                },
+                "password": {
+                    "description": "User's password",
+                    "type": "string",
+                    "example": "12345"
+                }
+            }
+        },
+        "User Login": {
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "description": "User's email address",
+                    "type": "string",
+                    "example": "hope@yahoo.co.uk"
+                },
+                "password": {
+                    "description": "User's password",
+                    "type": "string",
+                    "example": "12345"
+                }
+            }
+        }
+    }
+}

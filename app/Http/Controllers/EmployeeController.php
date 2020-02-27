@@ -29,6 +29,7 @@ class EmployeeController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
+     *
      */
     public function store(Request $request)
     {
@@ -68,6 +69,33 @@ class EmployeeController extends Controller
         ], 201);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     *
+     *  *  @SWG\Get(
+     *      path="/compute/paye/{id}",
+     *      tags={"Employee"},
+     *      summary="Calculates the employee payee",
+     *      description="Calculates employee payee",
+     *     * summary="Display the paye by employee id",
+     *      @SWG\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          type="integer",
+     *          description="Display the paye by employee id",
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="payee for employee"
+     *       ),
+     *       @SWG\Response(response=400, description="Bad request"),
+     *       security={
+     *           {"Authorization: Bearer": "token"}
+     *       }
+     *     )
+     */
     public function computePayeByEmployeeId($id) {
         // get employee record
         $employee = Employee::findOrFail($id);

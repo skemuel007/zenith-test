@@ -20,20 +20,20 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      *
      * @SWG\Post(
-     *     path="auth/login",
+     *     path="/auth/login",
      *     tags={"User"},
      *     summary="Logs user in",
      *     @SWG\Parameter(
      *          name="body",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Applicant Login"),
+     *          @SWG\Schema(ref="#/definitions/User Login"),
      *          description="Json format"
      *     ),
      *     @SwG\Response(
      *          response=200,
-     *          description="title: Applicant Login",
-     *          @SWG\Schema(ref="#/definitions/Applicant Login")
+     *          description="title: User login successful",
+     *          @SWG\Schema(ref="#/definitions/User Registration")
      *     ),
      *     @SWG\Response(
      *          response=422,
@@ -87,6 +87,44 @@ class AuthController extends Controller
         ], JsonResponse::HTTP_OK);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse     * Create Applicant Record
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * @SWG\Post(
+     *     path="/auth/create",
+     *     tags={"User"},
+     *     summary="Creates a new User",
+     *     @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/User Registration"),
+     *          description="Json format"
+     *     ),
+     *     @SwG\Response(
+     *          response=201,
+     *          description="title: Users Record Created",
+     *          @SWG\Schema(ref="#/definitions/User Registration")
+     *     ),
+     *     @SWG\Response(
+     *          response=422,
+     *          description="title: Parameter validation failure",
+     *     ),
+     *     @SWG\Response(
+     *          response=401,
+     *          description="title: Authentication error",
+     *     ),
+     *     @SWG\Response(
+     *          response=405,
+     *          description="Invalid Http Method"
+     *     )
+     * )
+     *
+     *
+     */
     public function create(Request $request) {
         // validate request parameters
         $validator = Validator::make($request->all(), [

@@ -30,6 +30,40 @@ class ScaleController extends Controller
         ], 200);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * * @SWG\Post(
+     *     path="/scale",
+     *     tags={"Scale"},
+     *     summary="Create Gradation Scale",
+     *     @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Scale"),
+     *          description="Json format"
+     *     ),
+     *     @SwG\Response(
+     *          response=201,
+     *          description="title: Scale Added",
+     *          @SWG\Schema(ref="#/definitions/User Registration")
+     *     ),
+     *     @SWG\Response(
+     *          response=422,
+     *          description="title: Parameter validation failure",
+     *     ),
+     *     @SWG\Response(
+     *          response=401,
+     *          description="title: Authentication error",
+     *     ),
+     *     @SWG\Response(
+     *          response=405,
+     *          description="Invalid Http Method"
+     *     )
+     * )
+     */
     public function store(Request $request) {
         // validate request inputs
         $validator = Validator::make(
@@ -62,7 +96,7 @@ class ScaleController extends Controller
         return response()->json([
             'message' => 'Scale Added',
             'data' => null
-        ], 200);
+        ], 201);
 
     }
 

@@ -7,6 +7,50 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * Class User
+ * @package App
+ *
+ * @SWG\Definition(
+ *     definition="User Registration",
+ *     required={"name", "email", "password"},
+ *     @SWG\Property(
+ *          property="name",
+ *          type="string",
+ *          description="User's name",
+ *          example="Samuel Kelvin"
+ *     ),
+ *     @SWG\Property(
+ *          property="email",
+ *          type="string",
+ *          description="User's email address",
+ *          example="hope@yahoo.co.uk"
+ *     ),
+ *     @SWG\Property(
+ *          property="password",
+ *          type="string",
+ *          description="User's password",
+ *          example="12345"
+ *     )
+ * )
+ *
+ * * @SWG\Definition(
+ *     definition="User Login",
+ *     required={"email", "password"},
+ *     @SWG\Property(
+ *          property="email",
+ *          type="string",
+ *          description="User's email address",
+ *          example="hope@yahoo.co.uk"
+ *     ),
+ *     @SWG\Property(
+ *          property="password",
+ *          type="string",
+ *          description="User's password",
+ *          example="12345"
+ *     )
+ * )
+ */
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
